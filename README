@@ -1,0 +1,9 @@
+HTML::Diff is a Perl module for finding changes between two strings of
+HTML.
+
+To install, simply copy HTML/Diff.pm to somewhere in your perl include
+path.
+
+Copyright (c) 2003 Ezra elias kilty Cooper <ezra@ezrakilty.net>. All
+rights reserved. This program is free software; you can redistribute
+it and/or modify it under the same terms as Perl itself.

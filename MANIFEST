@@ -1,0 +1,6 @@
+Changes
+Makefile
+MANIFEST
+README
+t/01-diff.t
+HTML/Diff.pm
