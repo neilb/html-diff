@@ -3,4 +3,6 @@
 use ExtUtils::MakeMaker;
 
 WriteMakefile(NAME => "HTML::Diff",
-		INST_LIB => "./lib");
+	      VERSION => 0.55,
+	      PREQREQ_PM => { 'Algorithm::Diff' => '1.15' },
+	      INST_LIB => "./lib");

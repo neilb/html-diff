@@ -2,7 +2,7 @@
 
 package HTML::Diff;
 
-$VERSION = '0.5';
+$VERSION = '0.55';
 
 use strict;
 
@@ -10,9 +10,21 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT = qw(line_diff word_diff html_word_diff);
 
-our $UNBALANCED_TAGS = qr/br|hr|^p$|li|\/>$/i;
+# This list of tags is taken from the XHTML spec and includes
+# all those for which no closing tag is expected. In addition
+# the pattern below matches any tag which ends with a slash /
+
+our @UNBALANCED_TAGS = qw(br hr p li base basefont meta link 
+			  col colgroup frame input isindex area 
+			  embed img bgsound marquee);
 
 use Algorithm::Diff 'sdiff';
+
+sub member {
+    my ($item, @list) = @_;
+
+    return scalar(grep {$_ eq $item} @list);
+}
 
 sub html_word_diff {
     my ($left, $right) = @_;
@@ -41,6 +53,7 @@ sub html_word_diff {
 	if ($_ =~ /^<.*>/) {
 	    if ($_ =~ m|^</|) {
 		my ($tag) = m|^</\s*([^ \t\n\r>]*)|;
+		$tag = lc $tag;
 		# If we found the closer for the tag on top 
 		# of the stack, pop it off.
 		if ($$tagstack[-1] eq $tag) {
@@ -48,9 +61,10 @@ sub html_word_diff {
                 }
 		return [$_, $tag];
 	    } else {
-		my ($tag) = m|^<\s*([^ \t\n\r>]*)|;
-		if ($tag =~ $UNBALANCED_TAGS)
-		{	                        # (tags without closers)
+		my ($tag) = m|^<\s*([^\s>]*)|;
+		$tag = lc $tag;
+		if (member($tag, @UNBALANCED_TAGS) || $tag =~ m#/\s*>$#)
+		{	                # (tags without correspond closer tags)
 		    return [$_, $tag];
 		} else {
 		    push @$tagstack, $tag;
@@ -84,7 +98,8 @@ sub html_word_diff {
     foreach $ch (@$chunks) {
 	my ($signal, $left, $right) = @$ch;
 	if ($signal eq 'u' && $lastsignal ne 'u') {
-	    push @result, [$lastsignal, $lbuf, $rbuf];
+	    push @result, [$lastsignal, $lbuf, $rbuf]
+		unless $lastsignal eq '';
 	    $lbuf = "";
 	    $rbuf = "";
 	} elsif ($signal ne 'u' && $lastsignal eq 'u') {

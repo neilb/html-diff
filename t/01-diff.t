@@ -4,7 +4,7 @@ use strict;
 
 use Test;
 
-BEGIN { plan tests => 4 }
+BEGIN { plan tests => 5 }
 
 use Getopt::Long;
 my ($verbose);
@@ -40,15 +40,20 @@ my $test_text_d = 'PEOPLE said, "The bell is sounding." A strange wondrous was h
 # (e.g. "<b>a b c d</b>" -> "<i>a b c d</i>" considers all of "a b c d" 
 # as a change). It also tests that whitespace changes are effectively ignored.
 
-my $test_html_a = '<center>
+my $test_html_a = '<BASE HREF= "http://some-site.com/index.html">
+<center>
 <h1>
 <a href="http://www.cs.brown.edu/people/jes/acm.strategic.dirs.html">Strategic Directions for <b> Research in Theory of Computing </b></a>
 </h1>
+
+<!-- This is an HTML comment -->
 
 September 23, 1996
 </center>
 
 <p>
+
+< this is an unkown html tag />
 
 Anne Condon, University of Wisconsin <br>
 Faith Fich, University of Toronto <br>
@@ -173,15 +178,24 @@ ok(test_diff_continuity($test_html_a, $test_html_b,
 			\&HTML::Diff::html_word_diff, 1));
 my $result = HTML::Diff::html_word_diff($test_html_a, $test_html_b);
 
-#open OUT, ">expect";
-#print OUT Dumper($result);
-#close OUT;
+# Use the following lines to capture a "correct" result (when you
+# think you've got one) which can be used to validate future tests
+
+# open OUT, ">expect";
+# print OUT Dumper($result);
+# close OUT;
+
+# This value is the result we expect from HTML::Diff::html_word_diff()
+# If the actual result differs by one byte, it's a failure.
+# When the diff code is changed, you'll need to calculate a new expected
+#   value using the lines above, and paste the resulting value below.
 
 my $expect = [
     [
-     undef,
-     undef,
-     undef
+     '-',
+     '<BASE HREF= "http://some-site.com/index.html">
+',
+     ''
     ],
     [
      'u',
@@ -212,27 +226,51 @@ my $expect = [
      '</a>
 </h1>
 
-September 23, 1996
+',
+     '</a>
+</h1>
+
+'
+    ],
+    [
+     '-',
+     '<!-- This is an HTML comment -->
+
+',
+     ''
+    ],
+    [
+     'u',
+     'September 23, 1996
 </center>
 
 <p>
 
-Anne Condon, University of Wisconsin <br>
+',
+     'September 23, 1996
+</center>
+
+<p>
+
+'
+    ],
+    [
+     '-',
+     '< this is an unkown html tag />
+
+',
+     ''
+    ],
+    [
+     'u',
+     'Anne Condon, University of Wisconsin <br>
 Faith Fich, University of Toronto <br>
 Greg N. Frederickson, Purdue University <br>
 Andrew V. Goldberg, NEC Research Institute <br>
 David S. Johnson, AT&amp;T Bell Laboratories <br>
 Michael C. Loui, University of Illinois at Urbana-Champaign  <br>
 Steven Mahaney, DIMACS ',
-            '</a>
-</h1>
-
-September 23, 1996
-</center>
-
-<p>
-
-Anne Condon, University of Wisconsin <br>
+     'Anne Condon, University of Wisconsin <br>
 Faith Fich, University of Toronto <br>
 Greg N. Frederickson, Purdue University <br>
 Andrew V. Goldberg, NEC Research Institute <br>
@@ -293,7 +331,7 @@ and other science and engineering disciplines.
 opportunities for future research.  Some research opportunities build
 bridges between theory of computing and other areas of computer
 science, and other science and engineering disciplines.  <p>'
-    ]
+    ],
 ];
 
 ok(deep_compare($result, $expect));
@@ -323,6 +361,24 @@ if ($verbose) {
     print "Result of diff:\n";
     print "[$_]\n" foreach (map {join "||", @$_} @$diffchunks);
 }
+
+sub check_diff_integrity {
+    my $failure = 0;
+    foreach my $chunk (@{$_[0]}) {
+	my ($mark, $left, $right) = @$chunk;
+	if ($mark ne 'u' && $left eq $right) {
+	    print "[$left] is [$right] but HTML::Diff thinks they're different!\n";
+	    $failure = 1;
+	}
+    }
+    return !$failure;
+}
+
+my $A = "<UL><li>monkey</UL><P>Search</P>";
+my $B = "<UL><li>monkey</UL><UL><li>llama</UL><P>Search</P>";
+
+$result = html_word_diff($A, $B);
+ok(check_diff_integrity($result));
 
 sub diff_file {
     my ($left, $right) = @_;

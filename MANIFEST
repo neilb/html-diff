@@ -2,5 +2,6 @@ Changes
 Makefile.PL
 MANIFEST
 README
+htmldiff
 t/01-diff.t
 lib/HTML/Diff.pm

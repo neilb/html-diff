@@ -1,3 +1,17 @@
+0.55, April 27, 2004:
+    * Fixed a problem where some "same" chunks were considered
+      "different."  This occured if you had container tags that used
+      uppercase letters.
+    * First element of result always contained a 'different' chunk
+      between undef values. It's now suppressed.
+
+0.54, June 15, 2003:
+    * Following XTHML spec, added all the "single" (unclosable) tags, such
+      as IMG, BASE, LINK, etc. to the list of such tags used by the module.
+    * Converted this list into an exposed package variable, so that 
+      push @HTML::Diff::UNBALANCED_TAGS, $new_tag_name allows you to modify
+      the list of "single" tags.
+
 0.52, April 17, 2003:
     * Switched to Makefile.PL, thereby fixing broken tests.
 
