@@ -1,6 +1,6 @@
 Changes
-Makefile
+Makefile.PL
 MANIFEST
 README
 t/01-diff.t
-HTML/Diff.pm
+lib/HTML/Diff.pm

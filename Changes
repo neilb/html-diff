@@ -1,3 +1,6 @@
+0.52, April 17, 2003:
+    * Switched to Makefile.PL, thereby fixing broken tests.
+
 v0.51, April 16, 2003:
     * Added htmldiff script contributed by Maurice Aubrey.
 

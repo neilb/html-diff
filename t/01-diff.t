@@ -12,16 +12,6 @@ GetOptions("verbose!" => \$verbose) or die "Parsing command line failed.";
 
 use Data::Dumper;
 
-my $html_diff_root = $ENV{PWD};
-while (!-r "$html_diff_root/HTML/Diff.pm")
-{
-    ($html_diff_root) = $html_diff_root =~ m#(/(?:[^/]*/)*?)[^/]+/*$#;
-}
-
-die "Couldn't find HTML::Diff" 
-    unless -r "$html_diff_root/HTML/Diff.pm";
-
-use lib "$html_diff_root/HTML/Diff.pm";
 use HTML::Diff qw(line_diff word_diff html_word_diff);
 
 my $test_text_a = "Four score
