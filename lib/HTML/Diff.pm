@@ -1,9 +1,8 @@
-#!/usr/bin/perl
-
 package HTML::Diff;
 
 our $VERSION = '0.561';
 
+use 5.006;
 use strict;
 use warnings;
 
