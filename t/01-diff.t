@@ -4,7 +4,7 @@ use strict;
 
 use Test;
 
-BEGIN { plan tests => 5 }
+BEGIN { plan tests => 10 }
 
 use Getopt::Long;
 my ($verbose);
@@ -165,6 +165,16 @@ if ($verbose) {
     print "\n";
     print_diff($chunks);
 }
+
+ok(deep_compare(html_word_diff('', ''), [['', undef, undef]]));
+ok(deep_compare(html_word_diff('0', ''), [['-', '0', '']]));
+ok(deep_compare(html_word_diff('', '0'), [['+', '', '0']]));
+ok(deep_compare(html_word_diff('0', '0'), [['u', '0', '0']]));
+ok(deep_compare(html_word_diff('a b b', 'b b c'),
+		[['-', 'a ', ''],
+		 ['u', 'b ', 'b '],
+		 ['c', 'b', 'b c']]));
+   
 print "Testing line_diff on test_text_a and test_text_b\n" if $verbose;
 ok(test_diff_continuity($test_text_a, $test_text_b, 
 			\&HTML::Diff::line_diff));
@@ -314,7 +324,7 @@ theory.  The report reviews the purposes and goals of theoretical
 research, summarizes selected past and recent achievements, '
     ],
     [
-     '-',
+     'c',
      '<i>explains the importance of</i> ',
      'explains
 the importance of '

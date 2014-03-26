@@ -1,3 +1,13 @@
+0.56, November 7, 2006:
+    * In build process, fixed dependency check for prerequisite
+      Algorithm::Diff (#7340).
+    * Produce correct output when a diff chunk is precisely '0'
+      (#6756).
+    * Install the htmldiff tool into your bin directory on make 
+      install (#7341).
+    * Fixed some bugs where html_word_diff gave the wrong flag for a
+      chunk (e.g. ['+', 'b', 'b c']).
+
 0.55, April 27, 2004:
     * Fixed a problem where some "same" chunks were considered
       "different."  This occured if you had container tags that used
