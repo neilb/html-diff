@@ -29,6 +29,22 @@ WriteMakefile(
         : ()
     ),
 
+    ($mm_ver >= 6.64
+        ? (TEST_REQUIRES => {
+                'Test'         => 0,
+                'Getopt::Long' => 0.88,
+                'Data::Dumper' => 0,
+          })
+        : ()
+    ),
+
+    ($mm_ver >= 6.52
+        ? (CONFIGURE_REQUIRES => {
+                'ExtUtils::MakeMaker' => 6.30,
+          })
+        : ()
+    ),
+
     ($mm_ver <= 6.45
         ? ()
         : (META_MERGE => {

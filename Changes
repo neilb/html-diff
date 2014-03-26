@@ -6,6 +6,7 @@ Release history for Perl module HTML::Diff
     - Min perl version 5.6.0
     - Added github repo to metadata and pod
     - Reformatted this file as per CPAN::Changes::Spec
+    - Added TEST_REQUIRES and CONFIGURE_REQUIRES to Makefile.PL
     - Makefile.PL get version from module source
 
 0.561 2006-11-07
