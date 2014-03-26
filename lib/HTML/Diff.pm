@@ -172,9 +172,17 @@ sub word_diff {
 
 1;
 
-=pod
+=head1 NAME
 
-=head1 HTML::Diff
+HTML::Diff - compare two HTML strings and return a list of differences
+
+=head1 SYNOPSIS
+
+ use HTML::Diff;
+ 
+ $result = html_word_diff($left_text, $right_text);
+
+=head1 DESCRIPTION
 
 This module compares two strings of HTML and returns a list of a
 chunks which indicate the diff between the two input strings, where
@@ -187,12 +195,6 @@ produce the correct answer. But there may be some invalid HTML
 documents for which it gives you the answer you're looking for. Your
 mileage may vary; test it on lots of inputs from your domain before
 relying on it.
-
-=head1 SYNOPSIS
-
-    $result = html_word_diff($left_text, $right_text);
-
-=head1 DESCRIPTION
 
 Returns a reference to a list of triples [<flag>, <left>, <right>].
 Each triple represents a check of the input texts. The flag tells you
@@ -218,7 +220,7 @@ all words in between.
 
 =head1 SEE ALSO
 
-Algorithm::Diff
+L<Algorithm::Diff>
 
 =head1 REPOSITORY
 
