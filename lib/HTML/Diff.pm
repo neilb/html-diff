@@ -5,6 +5,7 @@ package HTML::Diff;
 our $VERSION = '0.561';
 
 use strict;
+use warnings;
 
 use Exporter;
 our @ISA = qw(Exporter);

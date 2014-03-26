@@ -1,6 +1,7 @@
 Release history for Perl module HTML::Diff
 
 0.57 2014-03-26
+    - Module now uses warnings
     - Reformatted this file as per CPAN::Changes::Spec
     - Makefile.PL get version from module source
 
