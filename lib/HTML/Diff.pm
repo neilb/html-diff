@@ -220,6 +220,10 @@ all words in between.
 
 Algorithm::Diff
 
+=head1 REPOSITORY
+
+L<https://github.com/neilbowers/html-diff>
+
 =head1 AUTHOR
 
 Whipped up by Ezra elias kilty Cooper, E<lt>ezra@ezrakilty.netE<gt>.
