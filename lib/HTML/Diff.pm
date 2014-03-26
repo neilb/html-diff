@@ -217,14 +217,21 @@ one of the neighboring words. For balanced tags, such as <b> </b>, it
 is intended that a change to the tag will be treated as a change to
 all words in between.
 
-=head1 AUTHOR
-
-Whipped up by Ezra elias kilty Cooper, <ezra@ezrakilty.net>.
-
-Patch contributed by Adam <asjo@koldfront.dk>.
-
 =head1 SEE ALSO
 
 Algorithm::Diff
+
+=head1 AUTHOR
+
+Whipped up by Ezra elias kilty Cooper, E<lt>ezra@ezrakilty.netE<gt>.
+
+Patch contributed by Adam E<lt>asjo@koldfront.dkE<gt>.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2003-2014 by Ezra elias kilty Cooper, E<lt>ezra@ezrakilty.netE<gt>
+
+This program is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
 
 =cut
