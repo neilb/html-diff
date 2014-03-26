@@ -2,8 +2,14 @@
 
 use ExtUtils::MakeMaker;
 
-WriteMakefile(NAME => "HTML::Diff",
-	      VERSION => 0.561,
-	      PREREQ_PM => { 'Algorithm::Diff' => '1.15' },
-	      INST_LIB => "./lib",
-	      EXE_FILES => ["htmldiff"]);
+WriteMakefile(
+    NAME         => 'HTML::Diff',
+    VERSION_FROM => 'lib/HTML/Diff.pm',
+
+    PREREQ_PM    => {
+        'Algorithm::Diff' => '1.15',
+    },
+
+    EXE_FILES    => ['htmldiff'],
+);
+
