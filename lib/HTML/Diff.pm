@@ -1,6 +1,6 @@
 package HTML::Diff;
 
-our $VERSION = '0.57';
+our $VERSION = '0.58';
 
 use 5.006;
 use strict;
