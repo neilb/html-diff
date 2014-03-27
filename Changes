@@ -2,6 +2,7 @@ Release history for Perl module HTML::Diff
 
 0.58 2014-03-27
     - Makefile.PL: bugtracker wasn't being specified right in META_MERGE
+    - Added XML::Diff to SEE ALSO
 
 0.57 2014-03-26
     - Module now uses warnings
