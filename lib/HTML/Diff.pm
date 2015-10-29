@@ -1,6 +1,6 @@
 package HTML::Diff;
 
-our $VERSION = '0.58';
+our $VERSION = '0.59';
 
 use 5.006;
 use strict;
@@ -179,7 +179,7 @@ HTML::Diff - compare two HTML strings and return a list of differences
 =head1 SYNOPSIS
 
  use HTML::Diff;
- 
+
  $result = html_word_diff($left_text, $right_text);
 
 =head1 DESCRIPTION
@@ -227,7 +227,7 @@ patch an XML file, given a diff.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/html-diff>
+L<https://github.com/neilb/html-diff>
 
 =head1 AUTHOR
 
