@@ -1,5 +1,12 @@
 Release history for Perl module HTML::Diff
 
+0.60 2015-10-30 NEILB
+    - meta-spec was set to '2.0' in Makefile.PL, which was causing
+      CPAN Testers Unknowns on Strawberry Perl.
+
+0.59 2015-10-29 NEILB
+    - Updated github repo URL after changing my github username
+
 0.58 2014-03-27
     - Makefile.PL: bugtracker wasn't being specified right in META_MERGE
     - Added XML::Diff to SEE ALSO

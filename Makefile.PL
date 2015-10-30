@@ -49,7 +49,7 @@ WriteMakefile(
         ? ()
         : (META_MERGE => {
             'meta-spec' => {
-                version => '2.0',
+                version => 2,
             },
             resources => {
                 bugtracker  => {
@@ -57,8 +57,8 @@ WriteMakefile(
                 },
                 repository  => {
                     type => 'git',
-                    web  => 'https://github.com/neilbowers/html-diff',
-                    url  => 'git://github.com/neilbowers/html-diff.git',
+                    web  => 'https://github.com/neilb/html-diff',
+                    url  => 'git://github.com/neilb/html-diff.git',
                 },
             },
           })
